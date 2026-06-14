@@ -37,10 +37,19 @@ def uruchom_symulator():
         gracz = next(k for k in kierowcy if k["imie"] == "TY (Gracz)")
         print(f"[TWÓJ BOLID] Poziom boostu: {gracz['boost']}%")
 
-        uzyj_boost_gracz = False
+       uzyj_boost_gracz = False
         if gracz["boost"] >= 25:
-            decyzja = input("Czy użyć boostu (-1.5s do czasu)? (t/n): ").strip().lower()
-            uzyj_boost_gracz = (decyzja == 't')
+            while True:
+                decyzja = input("Czy użyć boostu (-1.5s do czasu)? (t/n): ").strip().lower()
+                
+                if decyzja == 't':
+                    uzyj_boost_gracz = True
+                    break
+                elif decyzja == 'n':
+                    uzyj_boost_gracz = False
+                    break
+                else:
+                    print("Niepoprawny wybór! Wpisz literę 't' (tak) lub 'n' (nie).")
 
         for k in kierowcy:
             if k["imie"] == "TY (Gracz)":
