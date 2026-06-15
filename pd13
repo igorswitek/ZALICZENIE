@@ -1,0 +1,149 @@
+# TABLICA 10
+#
+def wypisz_tablice(wsk):
+    for i, elem in enumerate(wsk):
+        print(f"Pozycja [{i}] = {elem}")
+
+def znajdz_max(wsk):
+    maksimum = wsk[0]
+    for i in range(1, len(wsk)):
+        if maksimum < wsk[i]:
+            maksimum = wsk[i]
+    return maksimum
+
+def znajdz_min(wsk):
+    minimum = wsk[0]
+    for i in range(1, len(wsk)):
+        if minimum > wsk[i]:
+            minimum = wsk[i]
+    return minimum
+
+def suma_tablicy(wsk):
+    suma = 0
+    for elem in wsk:
+        suma += elem
+    return suma
+
+def srednia_arytmetyczna(wsk):
+    return suma_tablicy(wsk) / len(wsk)
+
+def sortuj_babelkowo(wsk):
+    rozmiar = len(wsk)
+    for i in range(rozmiar - 1):
+        for j in range(rozmiar - i - 1):
+            if wsk[j] > wsk[j + 1]:
+                wsk[j], wsk[j + 1] = wsk[j + 1], wsk[j]
+
+def klonuj_tablice(zrodlo, cel):
+    for elem in zrodlo:
+        cel.append(elem)
+
+def znajdz_mediane(wsk):
+    temp = []
+    klonuj_tablice(wsk, temp)
+    sortuj_babelkowo(temp)
+
+    rozmiar = len(temp)
+    if rozmiar % 2 != 0:
+        return float(temp[rozmiar // 2])
+    else:
+        return (temp[rozmiar // 2 - 1] + temp[rozmiar // 2]) / 2.0
+
+def pokaz_menu():
+    print("\nMENU GLOWNE")
+    print("1. pokaz elementy tablicy")
+    print("2. wypisz najwieksza liczbe")
+    print("3. wypisz najmniejsza liczbe")
+    print("4. oblicz sume wszystkich liczb")
+    print("5. oblicz srednia arytmetyczna")
+    print("6. wyznacz mediane")
+    print("0. wyjdz z aplikacji")
+
+def main():
+    liczby = []
+    ROZMIAR_TAB = 10
+
+    print(f"Wprowadz {ROZMIAR_TAB} liczb do tablicy:")
+    for i in range(ROZMIAR_TAB):
+        while True:
+            try:
+                liczba = int(input(f"Podaj liczbe na pozycji [{i}]: "))
+                liczby.append(liczba)
+                break
+            except ValueError:
+                print("Blad! Musisz podac liczbe calkowita. Sprobuj ponownie.")
+
+    while True:
+        pokaz_menu()
+
+        try:
+            opcja = int(input("twoj wybor: "))
+        except ValueError:
+            print("\nnieprawidlowa opcja!")
+            continue
+
+        if opcja == 1:
+            print("\nobecny stan tablicy:")
+            wypisz_tablice(liczby)
+        elif opcja == 2:
+            print(f"\nmaksimum wynosi: {znajdz_max(liczby)}")
+        elif opcja == 3:
+            print(f"\nminimum wynosi: {znajdz_min(liczby)}")
+        elif opcja == 4:
+            print(f"\nsuma wynosi: {suma_tablicy(liczby)}")
+        elif opcja == 5:
+            print(f"\nsrednia wynosi: {srednia_arytmetyczna(liczby):.2f}")
+        elif opcja == 6:
+            print(f"\nmediana wynosi: {znajdz_mediane(liczby):.2f}")
+        elif opcja == 0:
+            print("\nkoniec dzialania programu.")
+            break
+        else:
+            print("\nnieprawidlowa opcja!")
+
+if __name__ == "__main__":
+    main()
+
+# ====================================================================================
+#
+# TEKST (DUZE MALE LITERY)
+#
+# def modyfikuj_na_male(wsk):
+#     for i in range(len(wsk)):
+#         if 'A' <= wsk[i] <= 'Z':
+#             wsk[i] = chr(ord(wsk[i]) + (ord('a') - ord('A')))
+#
+# def modyfikuj_na_duze(wsk):
+#     for i in range(len(wsk)):
+#         if 'a' <= wsk[i] <= 'z':
+#             wsk[i] = chr(ord(wsk[i]) + (ord('A') - ord('a')))
+#
+# def zlicz_znaki(wsk):
+#     dlugosc = 0
+#     for _ in wsk:
+#         dlugosc += 1
+#     return dlugosc
+#
+# def main():
+#     while True:
+#         wpis = input("Podaj tekst: ")
+#
+#         if wpis == "":
+#             break
+#
+#         bufor = list(wpis + "\n")
+#
+#         print("".join(bufor))
+#
+#         modyfikuj_na_male(bufor)
+#         print("".join(bufor))
+#
+#         modyfikuj_na_duze(bufor)
+#         print("".join(bufor))
+#
+#         print(f"text size={zlicz_znaki(bufor)}")
+#
+#     print("Program zakonczony.")
+#
+# if __name__ == "__main__":
+#     main()
